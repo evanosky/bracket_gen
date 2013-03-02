@@ -1,0 +1,38 @@
+<% require 'pp' %>
+
+<h1>Brackets#generate</h1>
+<p>Valid (@isValid): <%= @isValid %> </p>
+
+
+<table style="border: 1px solid black">
+
+	<% @rounds[0].each_index do |i| %>
+	
+	<tr>	
+		<% (0..5).each do |round| %>
+		<td style="border: 1px solid black">
+			
+			<% game = @rounds[round][i] %>
+			<% if (game) %>
+				<%= game.get_teamA.get_name %><br/>
+				vs.<br/>
+				<%= game.get_teamB.get_name %>
+			<% end %>
+
+		</td>
+		<% end %>
+
+		<td style="border: 1px solid black">
+		
+			<% if (i==0) %>
+				<%= @champ.get_name %>
+			<% end %>
+		
+		</td>
+
+	</tr>
+		
+	<% end %>
+	
+</table>
+
