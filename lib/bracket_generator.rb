@@ -233,5 +233,3 @@ def gen_bracket
 	
 	return round1, round2, round3, round4, round5, round6, champ, isValid
 end  
-
-round1, round2, round3, round4, round5, round6, champ, isValid = gen_bracket

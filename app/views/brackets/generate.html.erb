@@ -1,38 +1,22 @@
 <% require 'pp' %>
 
 <h1>Brackets#generate</h1>
-<p>Valid (@isValid): <%= @isValid %> </p>
+<p>Valid: <%= @isValid %> </p>
 
+<div id="minimal">
+	<div class="demo">
+		Loading bracket...
+	</div>
+</div>
 
-<table style="border: 1px solid black">
+<script type="text/javascript">
+	var minimalData = {
+		teams : <%=@teams.to_json.html_safe %>,
+		results : <%=@results.to_json.html_safe %>,
+	}
 
-	<% @rounds[0].each_index do |i| %>
-	
-	<tr>	
-		<% (0..5).each do |round| %>
-		<td style="border: 1px solid black">
-			
-			<% game = @rounds[round][i] %>
-			<% if (game) %>
-				<%= game.get_teamA.get_name %><br/>
-				vs.<br/>
-				<%= game.get_teamB.get_name %>
-			<% end %>
-
-		</td>
-		<% end %>
-
-		<td style="border: 1px solid black">
-		
-			<% if (i==0) %>
-				<%= @champ.get_name %>
-			<% end %>
-		
-		</td>
-
-	</tr>
-		
-	<% end %>
-	
-</table>
-
+	$(function() {
+		$('#minimal .demo').bracket({
+			init: minimalData})
+	})
+</script>
