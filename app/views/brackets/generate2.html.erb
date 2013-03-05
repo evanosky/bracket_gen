@@ -1,0 +1,126 @@
+<% require 'pp' %>
+
+<h1>Bracket Results (<%= @isValid %>)</h1>
+
+<% uiRows = @teams.length * 4%>
+
+<div id="BracketGen">
+
+<% uiLastRoundIndex = @rounds.length-1 %>
+
+<% (0..uiLastRoundIndex).each do |uiRoundIndex| %>
+
+	<% uiTeamIndex = 0 %>
+	<div id="Round<%= uiRoundIndex+1 %>" class="Round">
+
+	<% if (uiRoundIndex != uiLastRoundIndex) %>
+		<% bLastRound = false %>
+		<% uiTopTeamCriteria = 2**uiRoundIndex %>
+		<% uiBottomTeamCriteria = 2**uiRoundIndex + 2**(uiRoundIndex + 1) %>
+	<% else %>
+		<% bLastRound = true %>
+		<% uiTopTeamCriteria = 2**uiRoundIndex - 4 %>
+		<% uiBottomTeamCriteria = 2**uiRoundIndex + 4 %>
+		<% uiChampionCriteria = 2**uiRoundIndex %>
+	<% end %>
+
+	<% uiEndCriteria = 2**(uiRoundIndex+2) %>
+
+	<% (0..uiRows/2-1).each do |uiRowIndex| %>
+
+		<% sDivText = "" %>
+		<% uiMatchRow = uiRowIndex % uiEndCriteria %>
+		<% sClasses = uiMatchRow.to_s + " " %>
+
+		<% if (bLastRound) %>
+			<% case uiMatchRow %>
+			<% when uiTopTeamCriteria-1 %>
+				<% sClasses += "TopTeam FromLeft LastRound" %>
+				<% sDivText += @rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_name %>
+			<% when uiBottomTeamCriteria-1 %>
+				<% sClasses += "BottomTeam FromRight LastRound" %>
+				<% sDivText += @rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_name %>
+			<% when uiChampionCriteria-1 %>
+				<% sClasses += "ChampionTeam Desc" %>
+				<% sDivText += "National Champion" %>
+			<% when uiChampionCriteria %>
+				<% sClasses += "ChampionTeam Winner" %>
+				<% sDivText += @champ.get_name %>
+			<% else %>
+				<% sClasses += "Gap FromLeft" %>
+			<% end %>
+		<% else %>
+			<% case uiMatchRow %>
+			<% when uiTopTeamCriteria-1 %>
+				<% sClasses += "TopTeam FromLeft " %>
+				<% sDivText += @rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_name %>
+			<% when uiBottomTeamCriteria - 1 %> 
+				<% sClasses += "BottomTeam FromLeft " %>
+				<% sDivText += @rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_name %>
+			<% when uiTopTeamCriteria..uiBottomTeamCriteria - 2 %>
+				<% sClasses += "Fill FromLeft " %>
+			<% when (uiEndCriteria - 1) %>
+				<% sClasses += "Gap FromLeft" %>
+				<% uiTeamIndex += 1 %>
+			<% else %>
+				<% sClasses += "Gap FromLeft" %>
+			<% end %>
+		<% end %>
+		
+		<div class="<%= sClasses %>"><div><%= sDivText %></div></div>
+			
+	<% end %>
+
+	</div>
+
+<% end %>
+
+<% for uiRoundIndex in (@rounds.length-2).downto(0) %>
+
+	<% uiTeamIndex = @rounds[uiRoundIndex].length / 2 %>
+	<div id="Round<%= uiRoundIndex+1 %>_Right" class="Round">
+
+	<% if (uiRoundIndex != uiLastRoundIndex) %>
+		<% bLastRound = false %>
+		<% uiTopTeamCriteria = 2**uiRoundIndex %>
+		<% uiBottomTeamCriteria = 2**uiRoundIndex + 2**(uiRoundIndex + 1) %>
+	<% else %>
+		<% bLastRound = true %>
+		<% uiTopTeamCriteria = 2**uiRoundIndex + 4 %>
+		<% uiBottomTeamCriteria = uiTopTeamCriteria %>
+	<% end %>
+
+	<% uiEndCriteria = 2**(uiRoundIndex+2) %>
+		
+	<% (0..uiRows/2-1).each do |uiRowIndex| %>
+
+		<% sDivText = "" %>
+		<% uiMatchRow = uiRowIndex % uiEndCriteria %>
+		<% sClasses = uiMatchRow.to_s + " " %>
+
+		<% case uiMatchRow %>
+		<% when uiTopTeamCriteria-1 %>
+			<% sClasses += "TopTeam FromRight " %>
+			<% sDivText += @rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_name %>
+		<% when uiBottomTeamCriteria - 1 %> 
+			<% sClasses += "BottomTeam FromRight " %>
+			<% sDivText += @rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_name %>
+		<% when uiTopTeamCriteria..uiBottomTeamCriteria - 2 %>
+			<% sClasses += "Fill FromRight " %>
+		<% when (uiEndCriteria - 1) %>
+			<% sClasses += "Gap " %>
+			<% uiTeamIndex += 1 %>
+		<% else %>
+			<% sClasses += "Gap " %>
+		<% end %>
+		
+		<div class="<%= sClasses %>"><div><%= sDivText %></div></div>
+			
+	<% end %>
+
+	</div>
+
+<% end %>
+
+</div>
+

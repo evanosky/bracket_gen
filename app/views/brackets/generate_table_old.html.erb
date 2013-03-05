@@ -1,0 +1,32 @@
+<% require 'pp' %>
+
+<h1>Brackets#generate</h1>
+<p>Valid (@isValid): <%= @isValid %> </p>
+<p><%= @teams %></p>
+
+<% uiCntr = 0 %>
+
+<% @rounds[0].each_index do |i| %>
+
+	<% sClasses = "" %>
+	<% sDivText = "" %>
+
+	<% case (uiCntr % 4) %>
+	<% when 0 then
+		<% sClasses += "TopTeam FromLeft " %>
+		<% sDivText += @rounds[0][i].get_teamA.get_name %>
+	<% when 1 then%>
+		<% sClasses += "TopTeamFill FromLeft " %>
+	<% when 2 then%>
+		<% sClasses += "BottomTeam FromLeft " %>
+		<% sDivText += @rounds[0][i].get_teamB.get_name %>
+	<% when 3 then%>
+		<% sClasses += "Gap FromLeft " %>
+	<% end %>
+	
+	<div class="<%= classes %>"><%= sDivText %></div>
+
+	<% uiCntr++ %>
+		
+<% end %>
+

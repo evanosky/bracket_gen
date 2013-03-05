@@ -638,40 +638,40 @@
       var teams = data.teams;
       var results = data.results;
       var rounds = Math.log(teams.length*2) / Math.log(2);
-      var matches = teams.length;
+      var matches = teams.length;      
       var graphHeight = winners.el.height();
       var round
 
-      for (var r = 0; r < rounds; r++) {
-        round = winners.addRound()
+        for (var r = 0; r < rounds; r++) {
+          round = winners.addRound()
 
-        for (var m = 0; m < matches; m++) {
-          var teamCb = null
+          for (var m = 0; m < matches; m++) {
+            var teamCb = null
 
-          if (r === 0) {
-            teamCb = function() {
-                var t = teams[m]
-                var i = m
-                return [{source: function() { return {name: t[0], idx: (i*2)} }},
-                        {source: function() { return {name: t[1], idx: (i*2+1)} }}]
-              }
+            if (r === 0) {
+              teamCb = function() {
+                  var t = teams[m]
+                  var i = m
+                  return [{source: function() { return {name: t[0], idx: (i*2)} }},
+                          {source: function() { return {name: t[1], idx: (i*2+1)} }}]
+                }
+            }
+
+
+            if (!(r === rounds-1 && isSingleElimination)) {
+              round.addMatch(teamCb)
+            }
+            else {
+              var match = round.addMatch(teamCb, winnerBubbles)
+              match.setAlignCb(function(tC) {
+                tC.css('top', '');
+                tC.css('position', 'absolute');
+                tC.css('bottom', (-tC.height()/2)+'px');
+              })
+            }
           }
-
-
-          if (!(r === rounds-1 && isSingleElimination)) {
-            round.addMatch(teamCb)
-          }
-          else {
-            var match = round.addMatch(teamCb, winnerBubbles)
-            match.setAlignCb(function(tC) {
-              tC.css('top', '');
-              tC.css('position', 'absolute');
-              tC.css('bottom', (-tC.height()/2)+'px');
-            })
-          }
+          matches /= 2;
         }
-        matches /= 2;
-      }
 
       if (isSingleElimination) {
         winners.final().connectorCb(function() { return null })
