@@ -1,42 +1,47 @@
 
 
 <div id="BracketGen">
-<div class="TopHeader">2013 NCAA Basketball Tournament Bracket (<%= @isValid %>)</div>
-<div class="BracketLogo">
-	<%= image_tag "2013-final-four-logo.jpg", :class => "BracketLogo" %>
-</div>
+	<div class="Overlays">
+		<%= image_tag "2013-final-four-logo.jpg", :class => "BracketLogo" %>
+		<div id="Overlay_South" class="ConfLabel">South</div>
+		<div id="Overlay_West" class="ConfLabel">West</div>
+		<div id="Overlay_East" class="ConfLabel">East</div>
+		<div id="Overlay_Midwest" class="ConfLabel">Midwest</div>
+	</div>
+	<div class="TopHeader">2013 NCAA Basketball Tournament Bracket (<%= @isValid %>)</div>
 
-<div class="Rounds">
-<% uiRows = @teams.length * 4%>
 
-<% uiLastRoundIndex = @rounds.length-1 %>
-<% for uiRoundIndex in 0.upto(uiLastRoundIndex) %>
-	
-	<%= render :partial => "round", :locals => {
-		:rounds => @rounds,
-		:champ => @champ,
-		:uiTeamIndex => 0,
-		:uiRoundIndex => uiRoundIndex,
-		:bLastRound => uiRoundIndex == uiLastRoundIndex,
-		:bFromLeft => true,
-		:uiRowsToDo => uiRows/2-1} %>
+	<div class="Rounds">
+	<% uiRows = @teams.length * 4%>
 
-<% end %>
+	<% uiLastRoundIndex = @rounds.length-1 %>
+	<% for uiRoundIndex in 0.upto(uiLastRoundIndex) %>
+		
+		<%= render :partial => "round", :locals => {
+			:rounds => @rounds,
+			:champ => @champ,
+			:uiTeamIndex => 0,
+			:uiRoundIndex => uiRoundIndex,
+			:bLastRound => uiRoundIndex == uiLastRoundIndex,
+			:bFromLeft => true,
+			:uiRowsToDo => uiRows/2-1} %>
 
-<% uiLastRoundIndex = @rounds.length-2 %>
-<% for uiRoundIndex in uiLastRoundIndex.downto(0) %>
+	<% end %>
 
-	<%= render :partial => "round", :locals => {
-		:rounds => @rounds,
-		:champ => @champ,
-		:uiTeamIndex => @rounds[uiRoundIndex].length / 2,
-		:uiRoundIndex => uiRoundIndex,
-		:bLastRound => false,
-		:bFromLeft => false,
-		:uiRowsToDo => uiRows/2-1} %>
+	<% uiLastRoundIndex = @rounds.length-2 %>
+	<% for uiRoundIndex in uiLastRoundIndex.downto(0) %>
 
-<% end %>
+		<%= render :partial => "round", :locals => {
+			:rounds => @rounds,
+			:champ => @champ,
+			:uiTeamIndex => @rounds[uiRoundIndex].length / 2,
+			:uiRoundIndex => uiRoundIndex,
+			:bLastRound => false,
+			:bFromLeft => false,
+			:uiRowsToDo => uiRows/2-1} %>
 
-</div>
+	<% end %>
+
+	</div>
 </div>
 

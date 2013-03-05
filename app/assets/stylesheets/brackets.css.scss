@@ -2,25 +2,61 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$pxRoundWidth: 80px;
+$uiRounds: 11;
+
+$pxRowHeaderHeight: 20px;
+$pxRowHeight: 8px;
+
 div#BracketGen
 {
 	postion: relative;
+	width: $uiRounds * $pxRoundWidth;
 
 	div.TopHeader {
+		height: $pxRowHeaderHeight;
 		width: 100%;
 		text-align: center;
 	}
 
-	div.BracketLogo {
-		position: absolute;
-		width: 150px;
-		left: 370px;
-		top: 50px;
-		
+	div.Overlays {
+		position: relative;
 
-		img {
-			width: 150px;
-			height: 150px;
+		div.ConfLabel {
+			font-size: .8em;
+			font-weight: bolder;
+			position: absolute;
+			width: $pxRoundWidth;
+		}
+
+		div#Overlay_South {
+			left: $pxRoundWidth * 3;
+			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 4 * 4;
+		}
+
+		div#Overlay_West {
+			left: $pxRoundWidth * 3;
+			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 12 * 4;
+		}
+
+		div#Overlay_East {
+			left: $pxRoundWidth * 7;
+			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 4 * 4;
+			text-align: right;
+		}
+
+		div#Overlay_Midwest {
+			left: $pxRoundWidth * 7;
+			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 12 * 4;
+			text-align: right;
+		}
+		
+		img.BracketLogo {
+			position: absolute;
+			width: 125px;
+			height: 125px;
+			left: $pxRoundWidth * $uiRounds /2 - 125px / 2;
+			top: $pxRowHeaderHeight * 3;
 		}
 
 	}
@@ -32,12 +68,12 @@ div#BracketGen
 
 		div.Round
 		{
-			width: 80px;
+			width: $pxRoundWidth;
 			float: left;
 
 			div {
 			
-				height: 8px;
+				height: $pxRowHeight;
 
 				div {
 					font-size: .5em;
@@ -45,12 +81,12 @@ div#BracketGen
 			}
 
 			div.RowHeader {
-				height: 10px;
-				padding: 5% 0;
-
+				height: $pxRowHeaderHeight;
+				
 				div {
 					text-align: center;
 					font-size: .6em;
+					padding: 5% 0;
 				}
 			}
 
@@ -59,7 +95,6 @@ div#BracketGen
 
 				div {
 					color: white;
-					font-style: bold;
 				}
 			}
 

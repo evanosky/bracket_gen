@@ -1,4 +1,4 @@
-<div id="Round<%= uiRoundIndex+1%>_<%= bFromLeft && !bLastRound ? "_Left" : "_Right" %>" class="Round">
+<div id="Round<%= uiRoundIndex+1%>_<%= bFromLeft && !bLastRound ? "Left" : "Right" %>" class="Round">
 
 	<% case uiRoundIndex+1 %>
 	<% when 1 %>
@@ -16,7 +16,7 @@
 	<% when 5 %>
 		<% sHeaderText = "Final Four" %>
 		<% sHeaderDesc = "March 31" %>
-	<% when 5 %>
+	<% when 6 %>
 		<% sHeaderText = "Championship" %>
 		<% sHeaderDesc = "April 2" %>
 	<% end %>
