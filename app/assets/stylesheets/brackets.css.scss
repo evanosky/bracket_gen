@@ -4,115 +4,168 @@
 
 div#BracketGen
 {
+	postion: relative;
 
-	div.Round
-	{
-		width: 100px;
-		
-		div {
-		
-			height: 10px;
-
-			div {
-				font-size: .5em;
-			}
-		}
-		
-		float: left;
-
-		div.FromLeft {
-
-			position: relative;
-
-			div {
-				position: absolute;
-				bottom: 0px;
-				left: 0px;
-				
-				text-align: left;
-			}
-
-		}
-
-		div.FromRight {
-
-			position: relative;
-
-			div {
-				position: absolute;
-				bottom: 0px;
-				right: 0px;
-
-				text-align: right;
-			}
-
-		}
-
-		div.TopTeam {
-			div {
-				width: 100%;
-				border-bottom: 1px black solid;
-			}
-		}
-
-		div.BottomTeam {
-			div {
-				width: 100%;
-				border-bottom: 1px black solid;
-			}
-		}
-
-		div.BottomTeam.FromLeft {
-			border-right: 1px black solid;
-		}
-
-		div.BottomTeam.FromRight {
-			border-left: 1px black solid;
-		}
-
-		div.Fill.FromLeft {
-			border-right: 1px black solid;
-		}
-
-		div.Fill.FromRight {
-			border-left: 1px black solid;
-		}
-
-		div.TopTeam.FromLeft.LastRound {
-
-			div {
-				width: 80%;
-			}
-		}
-
-		div.BottomTeam.FromRight.LastRound {
-
-			border-left: none;
-
-			div {
-				width: 80%;
-			}
-		}
-
-		div.ChampionTeam {
-
-			position: relative;
-
-			div {
-				width: 80%;
-				margin: 0px auto;
-				text-align: center;
-			}
-		}
-
-		div.ChampionTeam.Winner {
-
-			div {
-				border: 1px black solid;
-			}
-
-		}
+	div.TopHeader {
+		width: 100%;
+		text-align: center;
 	}
 
+	div.BracketLogo {
+
+		position: absolute;
+		margin: 0px auto;
+		width: 150px;
+		left: 480px;
+		top: 50px;
+		
+
+		img {
+			width: 150px;
+			height: 150px;
+		}
+
+	}
+
+
+	div.Rounds 
+	{
+		clear: both;
+
+		div.Round
+		{
+			width: 100px;
+			float: left;
+
+			div {
+			
+				height: 8px;
+
+				div {
+					font-size: .5em;
+				}
+			}
+
+			div.RowHeader {
+				height: 10px;
+				padding: 5% 0;
+
+				div {
+					text-align: center;
+					font-size: .6em;
+				}
+			}
+
+			div.RowHeader.Label {
+				background-color: blue;
+
+				div {
+					color: white;
+					font-style: bold;
+				}
+			}
+
+			div.RowHeader.Desc {
+				margin-bottom: 10px;
+
+				div {
+					font-style: italic;
+				}
+			}
+
+			div.FromLeft {
+
+				position: relative;
+
+				div {
+					position: absolute;
+					bottom: 0px;
+					left: 0px;
+					
+					text-align: left;
+				}
+
+			}
+
+			div.FromRight {
+
+				position: relative;
+
+				div {
+					position: absolute;
+					bottom: 0px;
+					right: 0px;
+
+					text-align: right;
+				}
+
+			}
+
+			div.TopTeam {
+				div {
+					width: 100%;
+					border-bottom: 1px black solid;
+				}
+			}
+
+			div.BottomTeam {
+				div {
+					width: 100%;
+					border-bottom: 1px black solid;
+				}
+			}
+
+			div.BottomTeam.FromLeft {
+				border-right: 1px black solid;
+			}
+
+			div.BottomTeam.FromRight {
+				border-left: 1px black solid;
+			}
+
+			div.Fill.FromLeft {
+				border-right: 1px black solid;
+			}
+
+			div.Fill.FromRight {
+				border-left: 1px black solid;
+			}
+
+			div.TopTeam.FromLeft.LastRound {
+
+				div {
+					width: 80%;
+				}
+			}
+
+			div.BottomTeam.FromRight.LastRound {
+
+				border-left: none;
+
+				div {
+					width: 80%;
+				}
+			}
+
+			div.ChampionTeam {
+
+				position: relative;
+
+				div {
+					width: 80%;
+					margin: 0px auto;
+					text-align: center;
+				}
+			}
+
+			div.ChampionTeam.Winner {
+
+				div {
+					border: 1px black solid;
+				}
+
+			}
+		}
+	}
 }
 

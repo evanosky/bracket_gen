@@ -1,8 +1,13 @@
-<h1>Bracket Results (<%= @isValid %>)</h1>
 
-<% uiRows = @teams.length * 4%>
 
 <div id="BracketGen">
+<div class="TopHeader">2013 NCAA Basketball Tournament Bracket (<%= @isValid %>)</div>
+<div class="BracketLogo">
+	<%= image_tag "2013-final-four-logo.jpg", :class => "BracketLogo" %>
+</div>
+
+<div class="Rounds">
+<% uiRows = @teams.length * 4%>
 
 <% uiLastRoundIndex = @rounds.length-1 %>
 <% for uiRoundIndex in 0.upto(uiLastRoundIndex) %>
@@ -32,5 +37,6 @@
 
 <% end %>
 
+</div>
 </div>
 
