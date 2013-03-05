@@ -1,0 +1,61 @@
+<div id="Round<%= uiRoundIndex+1%>_<%= bFromLeft && !bLastRound ? "_Left" : "_Right" %>" class="Round">
+
+<% if (!bLastRound) %>
+	<% uiTopTeamCriteria = 2**uiRoundIndex %>
+	<% uiBottomTeamCriteria = 2**uiRoundIndex + 2**(uiRoundIndex + 1) %>
+<% else %>
+	<% uiTopTeamCriteria = 2**uiRoundIndex - 4 %>
+	<% uiBottomTeamCriteria = 2**uiRoundIndex + 4 %>
+	<% uiChampionCriteria = 2**uiRoundIndex %>
+<% end %>
+
+<% uiEndCriteria = 2**(uiRoundIndex+2) %>
+
+<% (0..uiRowsToDo).each do |uiRowIndex| %>
+
+	<% sDivText = "" %>
+	<% uiMatchRow = uiRowIndex % uiEndCriteria %>
+	<% sWhichSide = (bFromLeft ? "FromLeft " : "FromRight ") %>
+	<% sClasses = "Row" + uiMatchRow.to_s + " " + (!bLastRound ? sWhichSide + " " : "") %>
+
+	<% if (bLastRound) %>
+		<% case uiMatchRow %>
+		<% when uiTopTeamCriteria-1 %>
+			<% sClasses += "TopTeam FromLeft LastRound" %>
+			<% sDivText += rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_name %>
+		<% when uiBottomTeamCriteria-1 %>
+			<% sClasses += "BottomTeam FromRight LastRound" %>
+			<% sDivText += rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_name %>
+		<% when uiChampionCriteria-1 %>
+			<% sClasses += "ChampionTeam Desc" %>
+			<% sDivText += "National Champion" %>
+		<% when uiChampionCriteria %>
+			<% sClasses += "ChampionTeam Winner" %>
+			<% sDivText += champ.get_name %>
+		<% else %>
+			<% sClasses += "Gap" %>
+		<% end %>
+	<% else %>
+		<% case uiMatchRow %>
+		<% when uiTopTeamCriteria-1 %>
+			<% sClasses += "TopTeam " %>
+			<% sDivText += rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_name %>
+		<% when uiBottomTeamCriteria - 1 %> 
+			<% sClasses += "BottomTeam " %>
+			<% sDivText += rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_name %>
+		<% when uiTopTeamCriteria..uiBottomTeamCriteria - 2 %>
+			<% sClasses += "Fill " %>
+		<% when (uiEndCriteria - 1) %>
+			<% sClasses += "Gap " %>
+			<% uiTeamIndex += 1 %>
+		<% else %>
+			<% sClasses += "Gap " %>
+		<% end %>
+	<% end %>
+	
+	<div class="<%= sClasses %>">
+		<div><%= sDivText %></div>
+	</div>
+
+<% end %>
+</div>
