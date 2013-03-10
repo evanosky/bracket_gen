@@ -15,12 +15,16 @@
 			<div id="main_left" style="float: left; width: 150px; color: black;">
 				<div style="width: 150px;">
 				</div>
-				<div style="position: relative; width: 150px; top: 35px;">
+				<div style="position: relative; width: 150px; top: 50px;">
 						<%= yield :head %>
 				</div>
 			</div>
 			<div id="main_middle"><%= yield %></div>
-			<div id="main_right" style="float: left; width: 30px;"> </div>
+			<div id="main_right" style="float: left; width: 50px; margin-left: 10px; margin-top: 50px;">
+				<div>
+					<%= image_tag "printer.png", :width => "50px" %>
+				</div>
+			</div>
 		</div>
 	</div>
 
