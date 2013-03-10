@@ -22,7 +22,7 @@
 			<div id="main_middle"><%= yield %></div>
 			<div id="main_right" style="float: left; width: 50px; margin-left: 10px;">
 				<div>
-					<a href="generate2" class="ContextIcon">
+					<a href="<%= url_for(:controller=>"brackets", :action => "generate2") %>" class="ContextIcon">
 						<%= image_tag "printer.png", :width => "50px", :style => "margin-top: 50px;"%>
 						<div style="clear: both; font-size: .8em; font-weight: bold;">
 							Print
@@ -30,7 +30,7 @@
 					</a>
 				</div>
 				<div>
-					<a href="generate2" class="ContextIcon">
+					<a href="<%= url_for(:controller=>"brackets", :action => "generate2") %>" class="ContextIcon">
 						<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
 						<div style="clear: both; font-size: .8em; font-weight: bold;">
 							Generate
@@ -38,7 +38,7 @@
 					</a>
 				</div>
 				<div>
-					<a href="info" class="ContextIcon">
+					<a href="<%=url_for(:controller=>"brackets", :action => "info") %>" class="ContextIcon">
 						<%= image_tag "info.png", :width => "50px", :style => "margin-top: 50px; " %>
 						<div style="clear: both; font-size: .8em; font-weight: bold;">
 							Info
