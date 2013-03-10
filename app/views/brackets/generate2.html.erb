@@ -1,4 +1,6 @@
-
+<% content_for :head do %>
+	<div class="TopHeader">2013 NCAA Basketball Tournament Bracket (<%= @isValid %>)</div>
+<% end %>
 
 <div id="BracketGen">
 	<div class="Overlays">
@@ -8,8 +10,6 @@
 		<div id="Overlay_East" class="ConfLabel">East</div>
 		<div id="Overlay_Midwest" class="ConfLabel">Midwest</div>
 	</div>
-	<div class="TopHeader">2013 NCAA Basketball Tournament Bracket (<%= @isValid %>)</div>
-
 
 	<div class="Rounds">
 	<% uiRows = @teams.length * 4%>

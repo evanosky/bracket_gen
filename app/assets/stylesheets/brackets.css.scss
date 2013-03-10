@@ -4,20 +4,45 @@
 
 $pxRoundWidth: 80px;
 $uiRounds: 11;
+$pxPadding: 3px;
 
 $pxRowHeaderHeight: 20px;
+$uiHeaderRows: 2;
 $pxRowHeight: 8px;
+
+div#main_middle {
+	position: relative;
+	float: left; 
+	border: 4px solid #2C3E50; 
+	border-radius: 12px;
+	background-color: white;
+}
+
+div#main_middle:before {
+
+	$pxArrowSize: 18px;
+
+	content: "";
+	border-style: solid;
+	border-width: $pxArrowSize $pxArrowSize $pxArrowSize 0;
+	border-color: transparent #2C3E50 transparent transparent;
+	height: 0px;
+	position: absolute;
+	left: -$pxArrowSize;
+	top: 60px;
+	width: 0;
+	-webkit-transform: rotate(360deg);
+}
+
+div.TopHeader {
+	height: $pxRowHeaderHeight;
+	text-align: center;
+}
 
 div#BracketGen
 {
-	postion: relative;
+	position: relative;
 	width: $uiRounds * $pxRoundWidth;
-
-	div.TopHeader {
-		height: $pxRowHeaderHeight;
-		width: 100%;
-		text-align: center;
-	}
 
 	div.Overlays {
 		position: relative;
@@ -31,32 +56,34 @@ div#BracketGen
 
 		div#Overlay_South {
 			left: $pxRoundWidth * 3;
-			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 4 * 4;
+			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 4 * 4;
 		}
 
 		div#Overlay_West {
 			left: $pxRoundWidth * 3;
-			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 12 * 4;
+			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 12 * 4;
 		}
 
 		div#Overlay_East {
 			left: $pxRoundWidth * 7;
-			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 4 * 4;
+			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 4 * 4;
 			text-align: right;
 		}
 
 		div#Overlay_Midwest {
 			left: $pxRoundWidth * 7;
-			top: $pxRowHeaderHeight * 3 + $pxRowHeight * 12 * 4;
+			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 12 * 4;
 			text-align: right;
 		}
 		
 		img.BracketLogo {
+			$pxImageSize: 125px;
+
 			position: absolute;
-			width: 125px;
-			height: 125px;
-			left: $pxRoundWidth * $uiRounds /2 - 125px / 2;
-			top: $pxRowHeaderHeight * 3;
+			width: $pxImageSize;
+			height: $pxImageSize;
+			left: $pxRoundWidth * $uiRounds /2 - $pxImageSize / 2;
+			top: $pxRowHeaderHeight * $uiHeaderRows;
 		}
 
 	}
@@ -91,7 +118,7 @@ div#BracketGen
 			}
 
 			div.RowHeader.Label {
-				background-color: blue;
+				background-color: #2C3E50;
 
 				div {
 					color: white;
@@ -114,8 +141,8 @@ div#BracketGen
 					position: absolute;
 					bottom: 0px;
 					left: 0px;
-					
 					text-align: left;
+
 				}
 
 			}
@@ -136,24 +163,42 @@ div#BracketGen
 
 			div.TopTeam {
 				div {
-					width: 100%;
+					width: $pxRoundWidth - $pxPadding;
 					border-bottom: 1px black solid;
+				}
+			}
+
+			div.TopTeam.FromLeft {
+				div {
+					padding-left: $pxPadding;
+				}
+			}
+
+			div.TopTeam.FromRight {
+				div {
+					padding-right: $pxPadding;
 				}
 			}
 
 			div.BottomTeam {
 				div {
-					width: 100%;
+					width: $pxRoundWidth - $pxPadding;
 					border-bottom: 1px black solid;
 				}
 			}
 
 			div.BottomTeam.FromLeft {
 				border-right: 1px black solid;
+				div {
+					padding-left: $pxPadding;
+				}
 			}
 
 			div.BottomTeam.FromRight {
 				border-left: 1px black solid;
+				div {
+					padding-right: $pxPadding;
+				}
 			}
 
 			div.Fill.FromLeft {
