@@ -83,7 +83,7 @@
 		<% end %>
 		
 		<div class="<%= sClasses %>">
-			<div><%= sDivText%></div>
+			<div><%= truncate(sDivText, :length => 12) %></div>
 		</div>
 
 	<% end %>
