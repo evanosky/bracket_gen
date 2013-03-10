@@ -8,7 +8,7 @@ $pxPadding: 3px;
 
 $pxRowHeaderHeight: 20px;
 $uiHeaderRows: 2;
-$pxRowHeight: 12px;
+$pxRowHeight: 10px;
 
 $pxArrowSize: 18px;
 
@@ -106,7 +106,7 @@ div#BracketGen
 				height: $pxRowHeight;
 
 				div {
-					font-size: .7em;
+					font-size: .6em;
 				}
 			}
 
@@ -145,7 +145,7 @@ div#BracketGen
 					bottom: 0px;
 					left: 0px;
 					text-align: left;
-
+					padding-bottom: 2px;
 				}
 
 			}
@@ -160,6 +160,7 @@ div#BracketGen
 					right: 0px;
 
 					text-align: right;
+					padding-bottom: 2px;
 				}
 
 			}
