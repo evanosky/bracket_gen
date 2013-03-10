@@ -10,6 +10,8 @@ $pxRowHeaderHeight: 20px;
 $uiHeaderRows: 2;
 $pxRowHeight: 8px;
 
+$pxArrowSize: 18px;
+
 div#main_middle {
 	position: relative;
 	float: left; 
@@ -19,8 +21,6 @@ div#main_middle {
 }
 
 div#main_middle:before {
-
-	$pxArrowSize: 18px;
 
 	content: "";
 	border-style: solid;
@@ -37,6 +37,8 @@ div#main_middle:before {
 div.TopHeader {
 	height: $pxRowHeaderHeight;
 	text-align: center;
+	padding-left: $pxArrowSize;
+	padding-right: $pxArrowSize;
 }
 
 div#BracketGen
