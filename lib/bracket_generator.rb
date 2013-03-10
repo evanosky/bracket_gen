@@ -15,14 +15,19 @@ class Game # This class holds the two teams playing in a game.
 end
 
 class Team # This class holds the Name, Seed and Region for a team.
-  def initialize(aName, aSeed, aRegion)
-    @name = aName
+  def initialize(aLongName, aShortName, aSeed, aRegion)
+    @long_name = aLongName
+	@shrt_name = aShortName
     @seed = aSeed
 	@region = aRegion
   end
   
-  def get_name
-    return @name
+  def get_long_name
+    return @long_name
+  end
+  
+  def get_short_name
+    return @shrt_name
   end
   
   def get_seed
@@ -38,22 +43,22 @@ def DrawWinner(aTeamA, aTeamB)
 	# This function takes in two teams playing in a game and returns the winner and loser based on the probability of a team with their seed winning.
 	# Return values are winner, loser, validity flag
 	# The validity flag is false if the two seeds in the function call have never played each other before
-  	prob = [
- 			[ 0.5000000000, 0.5576923077, 0.5384615385, 0.7111111111, 0.8205128205, 0.7000000000, 1.0000000000, 0.7924528302, 0.9298245614, 1.0000000000, 0.4000000000, 1.0000000000, 1.0000000000, -1.000000000, -1.000000000, 1.0000000000 ],
- 			[ 0.4423076923, 0.5000000000, 0.6222222222, 0.4285714286, 0.2500000000, 0.7407407407, 0.7343750000, 0.4000000000, -1.000000000, 0.5750000000, 0.9090909091, 1.0000000000, -1.000000000, -1.000000000, 0.9629629630, -1.000000000 ],
- 			[ 0.4615384615, 0.3777777778, 0.5000000000, 0.8000000000, 0.6666666667, 0.5593220339, 0.7500000000, 1.0000000000, 1.0000000000, 0.5833333333, 0.6764705882, -1.000000000, -1.000000000, 0.8518518519, -1.000000000, -1.000000000 ],
- 			[ 0.2888888889, 0.5714285714, 0.2000000000, 0.5000000000, 0.5254237288, 0.6666666667, 1.0000000000, 0.3333333333, 1.0000000000, 1.0000000000, -1.000000000, 0.5925925926, 0.7870370370, 1.0000000000, -1.000000000, -1.000000000 ],
- 			[ 0.1794871795, 0.7500000000, 0.3333333333, 0.4745762712, 0.5000000000, 0.5000000000, -1.000000000, 0.3333333333, 0.5000000000, 1.0000000000, -1.000000000, 0.6666666667, 0.7857142857, -1.000000000, -1.000000000, -1.000000000 ],
- 			[ 0.3000000000, 0.2592592593, 0.4406779661, 0.3333333333, 0.5000000000, 0.5000000000, 0.5000000000, 0.0000000000, -1.000000000, 0.6666666667, 0.6666666667, -1.000000000, -1.000000000, 0.8461538462, -1.000000000, -1.000000000 ],
- 			[ 0.0000000000, 0.2656250000, 0.2500000000, 0.0000000000, -1.000000000, 0.5000000000, 0.5000000000, 0.0000000000, -1.000000000, 0.6018518519, 0.0000000000, -1.000000000, -1.000000000, 1.0000000000, 1.0000000000, -1.000000000 ],
- 			[ 0.2075471698, 0.6000000000, 0.0000000000, 0.6666666667, 0.6666666667, 1.0000000000, 1.0000000000, 0.5000000000, 0.4722222222, -1.000000000, 1.0000000000, 0.0000000000, 1.0000000000, -1.000000000, -1.000000000, -1.000000000 ],
- 			[ 0.0701754386, -1.000000000, 0.0000000000, 0.0000000000, 0.5000000000, -1.000000000, -1.000000000, 0.5277777778, 0.5000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000 ],
- 			[ 0.0000000000, 0.4250000000, 0.4166666667, 0.0000000000, 0.0000000000, 0.3333333333, 0.3981481481, -1.000000000, -1.000000000, 0.5000000000, 0.0000000000, -1.000000000, -1.000000000, 1.0000000000, 1.0000000000, -1.000000000 ],
- 			[ 0.6000000000, 0.0909090909, 0.3235294118, -1.000000000, -1.000000000, 0.3333333333, 1.0000000000, 0.0000000000, -1.000000000, 1.0000000000, 0.5000000000, -1.000000000, -1.000000000, 1.0000000000, -1.000000000, -1.000000000 ],
- 			[ 0.0000000000, 0.0000000000, -1.000000000, 0.4074074074, 0.3333333333, -1.000000000, -1.000000000, 1.0000000000, -1.000000000, -1.000000000, -1.000000000, 0.5000000000, 0.8750000000, -1.000000000, -1.000000000, -1.000000000 ],
- 			[ 0.0000000000, -1.000000000, -1.000000000, 0.2129629630, 0.2142857143, -1.000000000, -1.000000000, 0.0000000000, -1.000000000, -1.000000000, -1.000000000, 0.1250000000, 0.5000000000, -1.000000000, -1.000000000, -1.000000000 ],
- 			[ -1.000000000, -1.000000000, 0.1481481481, 0.0000000000, -1.000000000, 0.1538461538, 0.0000000000, -1.000000000, -1.000000000, 0.0000000000, 0.0000000000, -1.000000000, -1.000000000, 0.5000000000, -1.000000000, -1.000000000 ],
- 			[ -1.000000000, 0.0370370370, -1.000000000, -1.000000000, -1.000000000, -1.000000000, 0.0000000000, -1.000000000, -1.000000000, 0.0000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, 0.5000000000, -1.000000000 ],
+ 	prob = [
+ 			[ 0.5000000000, 0.5454545455, 0.5555555556, 0.7346938776, 0.8205128205, 0.7000000000, 1.0000000000, 0.8035714286, 0.9310344828, 1.0000000000, 0.4000000000, 1.0000000000, 1.0000000000, -1.000000000, -1.000000000, 1.0000000000 ],
+ 			[ 0.4545454545, 0.5000000000, 0.6222222222, 0.4285714286, 0.2500000000, 0.7500000000, 0.7384615385, 0.4000000000, -1.000000000, 0.5853658537, 0.9166666667, 1.0000000000, -1.000000000, -1.000000000, 0.9464285714, -1.000000000 ],
+ 			[ 0.4444444444, 0.3777777778, 0.5000000000, 0.8000000000, 0.6666666667, 0.5573770492, 0.6666666667, 1.0000000000, 1.0000000000, 0.6153846154, 0.6666666667, -1.000000000, -1.000000000, 0.8571428571, -1.000000000, -1.000000000 ],
+ 			[ 0.2653061224, 0.5714285714, 0.2000000000, 0.5000000000, 0.5409836066, 0.6666666667, 1.0000000000, 0.3333333333, 1.0000000000, 1.0000000000, -1.000000000, 0.6071428571, 0.7857142857, 1.0000000000, -1.000000000, -1.000000000 ],
+ 			[ 0.1794871795, 0.7500000000, 0.3333333333, 0.4590163934, 0.5000000000, 0.5000000000, -1.000000000, 0.3333333333, 0.5000000000, 1.0000000000, -1.000000000, 0.6607142857, 0.7857142857, -1.000000000, -1.000000000, -1.000000000 ],
+ 			[ 0.3000000000, 0.2500000000, 0.4426229508, 0.3333333333, 0.5000000000, 0.5000000000, 0.5000000000, 0.0000000000, -1.000000000, 0.6666666667, 0.6607142857, -1.000000000, -1.000000000, 0.8461538462, -1.000000000, -1.000000000 ],
+ 			[ 0.0000000000, 0.2615384615, 0.3333333333, 0.0000000000, -1.000000000, 0.5000000000, 0.5000000000, 0.0000000000, -1.000000000, 0.5982142857, 0.0000000000, -1.000000000, -1.000000000, 1.0000000000, 1.0000000000, -1.000000000 ],
+ 			[ 0.1964285714, 0.6000000000, 0.0000000000, 0.6666666667, 0.6666666667, 1.0000000000, 1.0000000000, 0.5000000000, 0.4821428571, -1.000000000, 1.0000000000, 0.0000000000, 1.0000000000, -1.000000000, -1.000000000, -1.000000000 ],
+ 			[ 0.0689655172, -1.000000000, 0.0000000000, 0.0000000000, 0.5000000000, -1.000000000, -1.000000000, 0.5178571429, 0.5000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000 ],
+ 			[ 0.0000000000, 0.4146341463, 0.3846153846, 0.0000000000, 0.0000000000, 0.3333333333, 0.4017857143, -1.000000000, -1.000000000, 0.5000000000, 0.0000000000, -1.000000000, -1.000000000, 1.0000000000, 1.0000000000, -1.000000000 ],
+ 			[ 0.6000000000, 0.0833333333, 0.3333333333, -1.000000000, -1.000000000, 0.3392857143, 1.0000000000, 0.0000000000, -1.000000000, 1.0000000000, 0.5000000000, -1.000000000, -1.000000000, 1.0000000000, -1.000000000, -1.000000000 ],
+ 			[ 0.0000000000, 0.0000000000, -1.000000000, 0.3928571429, 0.3392857143, -1.000000000, -1.000000000, 1.0000000000, -1.000000000, -1.000000000, -1.000000000, 0.5000000000, 0.7777777778, -1.000000000, -1.000000000, -1.000000000 ],
+ 			[ 0.0000000000, -1.000000000, -1.000000000, 0.2142857143, 0.2142857143, -1.000000000, -1.000000000, 0.0000000000, -1.000000000, -1.000000000, -1.000000000, 0.2222222222, 0.5000000000, -1.000000000, -1.000000000, -1.000000000 ],
+ 			[ -1.000000000, -1.000000000, 0.1428571429, 0.0000000000, -1.000000000, 0.1538461538, 0.0000000000, -1.000000000, -1.000000000, 0.0000000000, 0.0000000000, -1.000000000, -1.000000000, 0.5000000000, -1.000000000, -1.000000000 ],
+ 			[ -1.000000000, 0.0535714286, -1.000000000, -1.000000000, -1.000000000, -1.000000000, 0.0000000000, -1.000000000, -1.000000000, 0.0000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, 0.5000000000, -1.000000000 ],
  			[ 0.0000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, -1.000000000, 0.5000000000 ]
  		   ]
 
@@ -131,12 +136,12 @@ def AdvanceRound(aNum, aRound)
 	return next_Round, bRet
 end
 
-def FillGame(aTeamA_name,aTeamA_seed,aTeamB_name,aTeamB_seed,aRegion)
+def FillGame(aTeamA_Lname,aTeamA_Sname,aTeamA_seed,aTeamB_Lname,aTeamB_Sname,aTeamB_seed,aRegion)
 	# This function is used to generate the known, round 1 games established by the selection committee
 	myGame = Game.new
-	myGame.set_teamA(Team.new(aTeamA_name,aTeamA_seed,aRegion))
-	myGame.set_teamB(Team.new(aTeamB_name,aTeamB_seed,aRegion))
-	#print("#{myGame.get_teamA.get_region} Region: ##{myGame.get_teamA.get_seed} #{myGame.get_teamA.get_name} vs. ##{myGame.get_teamB.get_seed} #{myGame.get_teamB.get_name}\n")
+	myGame.set_teamA(Team.new(aTeamA_Lname,aTeamA_Sname,aTeamA_seed,aRegion))
+	myGame.set_teamB(Team.new(aTeamB_Lname,aTeamB_Sname,aTeamB_seed,aRegion))
+	#print("#{myGame.get_teamA.get_region} Region: ##{myGame.get_teamA.get_seed} #{myGame.get_teamA.get_long_name} vs. ##{myGame.get_teamB.get_seed} #{myGame.get_teamB.get_long_name}\n")
 	return myGame
 end
 
@@ -153,38 +158,38 @@ def gen_bracket
 	round6 = Array.new(1)  # 1  Game ,  2 teams
 
 	# Initialize Bracket Teams
-	round1[0] = FillGame('Kentucky',1,'Miss Valley State',16,'South')
-	round1[1] = FillGame('Iowa State',8,'Uconn',9,'South')
-	round1[2] = FillGame('Wichita State',5,'VCU',12,'South')
-	round1[3] = FillGame('Indiana',4,'New Mexico State',13,'South')
-	round1[4] = FillGame('UNLV',6,'Colorado',11,'South')
-	round1[5] = FillGame('Baylor',3,'South Dakota St.',14,'South')
-	round1[6] = FillGame('Notre Dame',7,'Xavier',10,'South')
-	round1[7] = FillGame('Duke',2,'Lehigh',15,'South')
-	round1[8] = FillGame('Michigan State',1,'LIU Brooklyn',16,'West')
-	round1[9] = FillGame('Memphis',8,'Saint Louis',9,'West')
-	round1[10] = FillGame('New Mexico',5,'Long Beach State',12,'West')
-	round1[11] = FillGame('Louisville',4,'Davidson',13,'West')
-	round1[12] = FillGame('Murray State',6,'Colorado State',11,'West')
-	round1[13] = FillGame('Marquette',3,'Iona',14,'West')
-	round1[14] = FillGame('Florida',7,'Virginia',10,'West')
-	round1[15] = FillGame('Missouri',2,'Norfolk State',15,'West')
-	round1[16] = FillGame('Syracuse',1,'UNC-Ashville',16,'East')
-	round1[17] = FillGame('Kansas State',8,'Southern Miss',9,'East')
-	round1[18] = FillGame('Vanderbilt',5,'Harvard',12,'East')
-	round1[19] = FillGame('Wisconsin',4,'Montana',13,'East')
-	round1[20] = FillGame('Cincinatti',6,'Texas',11,'East')
-	round1[21] = FillGame('Florida State',3,'St. Bonaventure',14,'East')
-	round1[22] = FillGame('Gonzaga',7,'West Virginia',10,'East')
-	round1[23] = FillGame('Ohio State',2,'Loyola',15,'East')
-	round1[24] = FillGame('North Carolina',1,'Lamar',16,'MidWest')
-	round1[25] = FillGame('Creighton',8,'Alabama',9,'MidWest')
-	round1[26] = FillGame('Temple',5,'California',12,'MidWest')
-	round1[27] = FillGame('Michigan',4,'Ohio',13,'MidWest')
-	round1[28] = FillGame('San Diego State',6,'NC State',11,'MidWest')
-	round1[29] = FillGame('Georgetown',3,'Belmont',14,'MidWest')
-	round1[30] = FillGame('Saint Mary\'s',7,'Purdue',10,'MidWest')
-	round1[31] = FillGame('Kansas',2,'Detroit',15,'MidWest')
+	round1[0] = FillGame('Kentucky','Kentucky',1,'Miss Valley State','Miss Vlly St',16,'South')
+	round1[1] = FillGame('Iowa State','Iowa State',8,'UConn','UConn',9,'South')
+	round1[2] = FillGame('Wichita State','Wichita St',5,'VCU','VCU',12,'South')
+	round1[3] = FillGame('Indiana','Indiana',4,'New Mexico State','N Mexico St',13,'South')
+	round1[4] = FillGame('UNLV','UNLV',6,'Colorado','Colorado',11,'South')
+	round1[5] = FillGame('Baylor','Baylor',3,'South Dakota St,.','S Dakota St',14,'South')
+	round1[6] = FillGame('Notre Dame','Notre Dame',7,'Xavier','Xavier',10,'South')
+	round1[7] = FillGame('Duke','Duke',2,'Lehigh','Lehigh',15,'South')
+	round1[8] = FillGame('Michigan State','Michigan St',1,'LIU Brooklyn','LIU Brooklyn',16,'West')
+	round1[9] = FillGame('Memphis','Memphis',8,'Saint Louis','Saint Louis',9,'West')
+	round1[10] = FillGame('New Mexico','New Mexico',5,'Long Beach State','Long Bch St',12,'West')
+	round1[11] = FillGame('Louisville','Louisville',4,'Davidson','Davidson',13,'West')
+	round1[12] = FillGame('Murray State','Murray St',6,'Colorado State','Colorado St',11,'West')
+	round1[13] = FillGame('Marquette','Marquette',3,'Iona','Iona',14,'West')
+	round1[14] = FillGame('Florida','Florida',7,'Virginia','Virginia',10,'West')
+	round1[15] = FillGame('Missouri','Mizzou',2,'Norfolk State','Norfolk St',15,'West')
+	round1[16] = FillGame('Syracuse','Syracuse',1,'UNC-Ashville','UNC-Ashville',16,'East')
+	round1[17] = FillGame('Kansas State','Kansas St',8,'Southern Miss','Southrn Miss',9,'East')
+	round1[18] = FillGame('Vanderbilt','Vanderbilt',5,'Harvard','Harvard',12,'East')
+	round1[19] = FillGame('Wisconsin','Wisconsin',4,'Montana','Montana',13,'East')
+	round1[20] = FillGame('Cincinatti','Cincinatti',6,'Texas','Texas',11,'East')
+	round1[21] = FillGame('Florida State','Florida St',3,'St. Bonaventure','St. Bonavent',14,'East')
+	round1[22] = FillGame('Gonzaga','Gonzaga',7,'West Virginia','W Virginia',10,'East')
+	round1[23] = FillGame('Ohio State','Ohio State',2,'Loyola','Loyola',15,'East')
+	round1[24] = FillGame('North Carolina','N Carolina',1,'Lamar','Lamar',16,'MidWest')
+	round1[25] = FillGame('Creighton','Creighton',8,'Alabama','Alabama',9,'MidWest')
+	round1[26] = FillGame('Temple','Temple',5,'California','California',12,'MidWest')
+	round1[27] = FillGame('Michigan','Michigan',4,'Ohio','Ohio',13,'MidWest')
+	round1[28] = FillGame('San Diego State','San Diego St',6,'NC State','NC State',11,'MidWest')
+	round1[29] = FillGame('Georgetown','Georgetown',3,'Belmont','Belmont',14,'MidWest')
+	round1[30] = FillGame('Saint Mary\'s','Saint Mary\'s',7,'Purdue','Purdue',10,'MidWest')
+	round1[31] = FillGame('Kansas','Kansas',2,'Detroit','Detroit',15,'MidWest')
 	#puts(' ')
 	max_iter = 8
 	isValid = 0

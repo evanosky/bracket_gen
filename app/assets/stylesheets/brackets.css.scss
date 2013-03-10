@@ -18,6 +18,8 @@ div#main_middle {
 	border: 4px solid #2C3E50; 
 	border-radius: 12px;
 	background-color: white;
+	width: $uiRounds * $pxRoundWidth;
+	height: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 4 * 16;
 }
 
 div#main_middle:before {
@@ -32,6 +34,24 @@ div#main_middle:before {
 	top: 60px;
 	width: 0;
 	-webkit-transform: rotate(360deg);
+}
+
+div#info_content {
+	
+	h2 {
+
+		font-size: 1.1em;
+		font-weight: bold;
+
+	}
+
+	p {
+
+		font-size: 1em;
+
+	}
+
+
 }
 
 div.TopHeader {
@@ -249,5 +269,10 @@ div#BracketGen
 			}
 		}
 	}
+}
+
+a.ContextIcon {
+	text-decoration: none;	
+
 }
 

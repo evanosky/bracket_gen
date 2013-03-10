@@ -1,6 +1,7 @@
 BracketGen::Application.routes.draw do
   get "brackets/generate"
   get "brackets/generate2"
+  get "brackets/info"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

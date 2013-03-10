@@ -88,11 +88,11 @@ class BracketsController < ApplicationController
     @rounds[0].each do |round_game|
       game = Array.new
       
-      game.push(round_game.get_teamA.get_name)
-      game.push(round_game.get_teamB.get_name)
+      game.push(round_game.get_teamA.get_short_name)
+      game.push(round_game.get_teamB.get_short_name)
 
-      @team_results[round_game.get_teamA.get_name] = Array.new(6) { 0 }
-      @team_results[round_game.get_teamB.get_name] = Array.new(6) { 0 }
+      @team_results[round_game.get_teamA.get_short_name] = Array.new(6) { 0 }
+      @team_results[round_game.get_teamB.get_short_name] = Array.new(6) { 0 }
 
       @teams.push(game)
     end
