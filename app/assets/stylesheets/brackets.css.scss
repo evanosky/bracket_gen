@@ -36,6 +36,10 @@ div#main_middle:before {
 	-webkit-transform: rotate(360deg);
 }
 
+div#main_middle.no_before:before {
+	border-style: none;
+}
+
 div#info_content {
 	
 	h2 {
@@ -59,7 +63,7 @@ div.TopHeader {
 	text-align: center;
 	padding-left: $pxArrowSize;
 	padding-right: $pxArrowSize;
-	font-size: .9em;
+	font-size: .8em;
 }
 
 div#BracketGen
