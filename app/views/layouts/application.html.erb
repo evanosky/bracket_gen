@@ -17,7 +17,12 @@
 						<%= yield :head %>
 				</div>
 			</div>
-			<div id="main_middle"><%= yield %></div>
+			<div id="main_middle">
+				<%= yield %>
+				<form id="auto_fill_form" action="/brackets/generate" method="post">
+					<input type="hidden" id="data_seed" name="data_seed" value="Hello World">Hello World</input>
+				</form>
+			</div>
 			<div id="main_right" style="float: left; width: 50px; margin-left: 10px;">
 				<div>
 					<a href="#" onclick="Application.printme();" class="ContextIcon">
@@ -28,10 +33,26 @@
 					</a>
 				</div>
 				<div>
-					<a href="<%= url_for(:controller=>"brackets", :action => "generate2") %>" class="ContextIcon">
+					<a href="<%= url_for(:controller=>"brackets", :action => "generate") %>" class="ContextIcon">
 						<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
 						<div style="clear: both; font-size: .8em; font-weight: bold;">
 							Generate
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="<%= url_for(:controller=>"brackets", :action => "generate", :blank=> true) %>" class="ContextIcon">
+						<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
+						<div style="clear: both; font-size: .8em; font-weight: bold;">
+							Generate (Blank)
+						</div>
+					</a>
+				</div>
+				<div>
+					<a href="#" class="ContextIcon" onclick="Application.onAutoFillClick(event);">
+						<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
+						<div style="clear: both; font-size: .8em; font-weight: bold;">
+							Generate (AutoComplete)
 						</div>
 					</a>
 				</div>

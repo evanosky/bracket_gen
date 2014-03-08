@@ -1,19 +1,51 @@
-<h1>Bracket Generator (<%= (@isValid == 1) ? "valid" : "invalid" %>)</h1>
+<% content_for :head do %>
+	<div class="TopHeader">2013 NCAA Bracket</div>
+<% end %>
 
-<div id="minimal">
-	<div class="demo">
-		Loading bracket...
+<div id="BracketGen">
+	<div class="Overlays">
+		<%= image_tag "2013-final-four-logo.jpg", :class => "BracketLogo" %>
+		<div id="Overlay_South" class="ConfLabel">South</div>
+		<div id="Overlay_West" class="ConfLabel">West</div>
+		<div id="Overlay_East" class="ConfLabel">East</div>
+		<div id="Overlay_Midwest" class="ConfLabel">Midwest</div>
+	</div>
+
+	<div class="Rounds">
+	<% uiRows = @teams.length * 4%>
+
+	<% uiLastRoundIndex = @rounds.length-1 %>
+	<% for uiRoundIndex in 0.upto(uiLastRoundIndex) %>
+		
+		<%= render :partial => "round", :locals => {
+			:rounds => @rounds,
+			:champ => @champ,
+			:uiTeamIndex => 0,
+			:uiRoundIndex => uiRoundIndex,
+			:bLastRound => uiRoundIndex == uiLastRoundIndex,
+			:bFromLeft => true,
+			:uiRowsToDo => uiRows/2-1,
+			:bDraggable => uiRoundIndex == 0,
+			:bFillAll => !@bBlank} %>
+
+	<% end %>
+
+	<% uiLastRoundIndex = @rounds.length-2 %>
+	<% for uiRoundIndex in uiLastRoundIndex.downto(0) %>
+
+		<%= render :partial => "round", :locals => {
+			:rounds => @rounds,
+			:champ => @champ,
+			:uiTeamIndex => @rounds[uiRoundIndex].length / 2,
+			:uiRoundIndex => uiRoundIndex,
+			:bLastRound => false,
+			:bFromLeft => false,
+			:uiRowsToDo => uiRows/2-1,
+			:bDraggable => uiRoundIndex == 0,
+			:bFillAll => !@bBlank} %>
+
+	<% end %>
+
 	</div>
 </div>
 
-<script type="text/javascript">
-	var minimalData = {
-		teams : <%=@teams.to_json.html_safe %>,
-		results : <%=@results.to_json.html_safe %>,
-	}
-
-	$(function() {
-		$('#minimal .demo').bracket({
-			init: minimalData})
-	})
-</script>

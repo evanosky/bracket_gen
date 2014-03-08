@@ -1,9 +1,9 @@
 BracketGen::Application.routes.draw do
   get "brackets/generate"
-  get "brackets/generate2"
   get "brackets/info"
+  post "brackets/generate"
 
-  match '/', :to => 'brackets#generate2'
+  match '/', :to => 'brackets#generate'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
