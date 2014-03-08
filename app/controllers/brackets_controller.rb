@@ -9,11 +9,18 @@ class BracketsController < ApplicationController
       @bBlank = params[:blank]
     end
 
+    @seed = ""
+    bAutoFill = false
     dataSeed = nil
     unless params[:data_seed].nil?
-      seed = params[:data_seed]
-      dataSeed = JSON.parse(seed)
-      Rails.logger.warn "*****#{dataSeed}"
+      @seed = params[:data_seed]
+      dataSeed = JSON.parse(@seed)
+
+      unless params[:auto_fill].nil?
+        bAutoFill = params[:auto_fill] == "true" ? true : false
+      end
+
+      Rails.logger.warn "*****#{dataSeed}, auto_fill: #{bAutoFill}"
     end
 
     round1, round2, round3, round4, round5, round6, @champ, @isValid = gen_bracket
