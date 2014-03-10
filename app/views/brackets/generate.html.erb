@@ -49,3 +49,25 @@
 	</div>
 </div>
 
+<form id="auto_fill_form" action="/brackets/generate" method="post">
+	<textarea cols="100" rows="15" id="data_seed" name="data_seed" style="float: left"><%= @seed %></textarea>
+	<input type="checkbox" id="auto_fill" name="auto_fill" value="true" checked="false">Auto Fill?</input>
+</form>
+<div style="float: right" >
+	<a href="#" class="ContextIcon" onclick="Application.UndoAutoFillClick(event);">
+		<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
+		<div style="clear: both; font-size: .8em; font-weight: bold;">
+			Undo AutoComplete
+		</div>
+	</a>
+</div>
+<div style="float: right" >
+	<a href="#" class="ContextIcon" onclick="Application.RetryAutoFillClick(event);">
+		<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
+		<div style="clear: both; font-size: .8em; font-weight: bold;">
+			Retry AutoComplete
+		</div>
+	</a>
+</div>
+
+

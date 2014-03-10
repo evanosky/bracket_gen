@@ -46,7 +46,16 @@ Application.getTeamsByRound = ->
 
 Application.onAutoFillClick = (ev) ->
   data = Application.getTeamsByRound()
-  $("#data_seed").attr("value", data)
+  $("#data_seed").text(data)
+  $("#auto_fill").attr("checked", true)
+  $("#auto_fill_form").submit()
+
+Application.UndoAutoFillClick = (ev) ->
+  $("#auto_fill").attr("checked", false)
+  $("#auto_fill_form").submit()
+
+Application.RetryAutoFillClick = (ev) ->
+  $("#auto_fill").attr("checked", true)
   $("#auto_fill_form").submit()
 
 $(document).ready ->
