@@ -25,7 +25,9 @@
 			:bLastRound => uiRoundIndex == uiLastRoundIndex,
 			:bFromLeft => true,
 			:uiRowsToDo => uiRows/2-1,
-			:bDraggable => uiRoundIndex == 0,
+			:bDraggable => true, #uiRoundIndex == 0,
+			:bDroppable => uiRoundIndex != 0,
+			:bUseName => uiRoundIndex == 0,
 			:bFillAll => !@bBlank} %>
 
 	<% end %>
@@ -41,7 +43,9 @@
 			:bLastRound => false,
 			:bFromLeft => false,
 			:uiRowsToDo => uiRows/2-1,
-			:bDraggable => uiRoundIndex == 0,
+			:bDraggable => true, #uiRoundIndex == 0,
+			:bDroppable => uiRoundIndex != 0,
+			:bUseName => uiRoundIndex == 0,
 			:bFillAll => !@bBlank} %>
 
 	<% end %>

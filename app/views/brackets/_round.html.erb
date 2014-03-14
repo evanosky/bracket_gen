@@ -51,16 +51,16 @@
 			<% case uiMatchRow %>
 			<% when uiTopTeamCriteria-1 %>
 				<% sClasses += "TopTeam FromLeft LastRound Droppable" %>
-				<% sDivText += (bFillAll || bDraggable) ? rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_short_name : ""%>
+				<% sDivText += (bFillAll || bUseName) ? rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_short_name : ""%>
 			<% when uiBottomTeamCriteria-1 %>
 				<% sClasses += "BottomTeam FromRight LastRound Droppable" %>
-				<% sDivText += (bFillAll || bDraggable) ? rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_short_name : ""%>
+				<% sDivText += (bFillAll || bUseName) ? rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_short_name : ""%>
 			<% when uiChampionCriteria-1 %>
 				<% sClasses += "ChampionTeam Desc" %>
 				<% sDivText += "Champion" %>
 			<% when uiChampionCriteria %>
 				<% sClasses += "ChampionTeam Winner Droppable" %>
-				<% sDivText += (bFillAll || bDraggable) ? champ.get_short_name : ""%>
+				<% sDivText += (bFillAll || bUseName) ? champ.get_short_name : ""%>
 			<% else %>
 				<% sClasses += "Gap" %>
 			<% end %>
@@ -68,12 +68,14 @@
 			<% case uiMatchRow %>
 			<% when uiTopTeamCriteria-1 %>
 				<% sClasses += "TopTeam " %>
-				<% sClasses += bDraggable ? "Draggable " : "Droppable " %>  
-				<% sDivText += (bFillAll || bDraggable) ? rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_short_name : "" %>
+				<% if (bDraggable) then sClasses += "Draggable " end%>  
+				<% if (bDroppable) then sClasses += "Droppable " end%>  
+				<% sDivText += (bFillAll || bUseName) ? rounds[uiRoundIndex][uiTeamIndex].get_teamA.get_short_name : "" %>
 			<% when uiBottomTeamCriteria - 1 %> 
 				<% sClasses += "BottomTeam " %>
-				<% sClasses += bDraggable ? "Draggable " : "Droppable " %>  
-				<% sDivText += (bFillAll || bDraggable) ? rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_short_name : "" %>
+				<% if (bDraggable) then sClasses += "Draggable " end%>  
+				<% if (bDroppable) then sClasses += "Droppable " end%>  
+				<% sDivText += (bFillAll || bUseName) ? rounds[uiRoundIndex][uiTeamIndex].get_teamB.get_short_name : "" %>
 			<% when uiTopTeamCriteria..uiBottomTeamCriteria - 2 %>
 				<% sClasses += "Fill " %>
 			<% when (uiEndCriteria - 1) %>
