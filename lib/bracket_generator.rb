@@ -198,37 +198,38 @@ end
 def AdvanceRound(aThisRound, aNextRound)
 	# This function take a round of games and propagates the winners to the next round
 	
+	this_Round = aThisRound
 	next_Round = aNextRound
 	
 	for game_num in 0..(aThisRound.length/2 - 1)
-	  #if( aThisRound[game_num*2].get_Winner.length != 0 ) # Check if winner has already been picked
 	  if( aThisRound[game_num*2].get_Winner != nil) # Check if winner has already been picked
 	    next_Round[game_num].set_teamA(aThisRound[game_num*2].get_Winner)
 	  else
 	    winner, loser, bRet = DrawWinner(aThisRound[game_num*2].get_teamA, aThisRound[game_num*2].get_teamB)
 	    if( bRet == 0 )
 	      winner, loser = DrawWinnerAlternate(aThisRound[game_num*2].get_teamA, aThisRound[game_num*2].get_teamB)
-	      puts "DrawWinnerAlternate Called"
+	      #puts "DrawWinnerAlternate Called"
 	    end
-	    print("Game #{game_num*2}, winner = #{winner.get_short_name}, loser = #{loser.get_short_name}\n");
+	    #print("Game #{game_num*2}, winner = #{winner.get_short_name}, loser = #{loser.get_short_name}\n");
+	    this_Round[game_num*2].set_Winner(winner)
 	    next_Round[game_num].set_teamA(winner)	    
 	  end
 	  
-	  #if( aThisRound[game_num*2+1].get_Winner.length != 0 ) # Check if winner has already been picked
 	  if( aThisRound[game_num*2+1].get_Winner != nil) # Check if winner has already been picked
 	    next_Round[game_num].set_teamB(aThisRound[game_num*2+1].get_Winner)
 	  else
 	    winner, loser, bRet = DrawWinner(aThisRound[game_num*2+1].get_teamA, aThisRound[game_num*2+1].get_teamB)
 	    if( bRet == 0 )
 	      winner, loser = DrawWinnerAlternate(aThisRound[game_num*2+1].get_teamA, aThisRound[game_num*2+1].get_teamB)
-     	      puts "DrawWinnerAlternate Called"
+     	      #puts "DrawWinnerAlternate Called"
 	    end
-	    print("Game #{game_num*2+1}, winner = #{winner.get_short_name}, loser = #{loser.get_short_name}\n");
+	    #print("Game #{game_num*2+1}, winner = #{winner.get_short_name}, loser = #{loser.get_short_name}\n");
+	    this_Round[game_num*2+1].set_Winner(winner)
 	    next_Round[game_num].set_teamB(winner)
 	  end
 	end
 
-	return next_Round
+	return this_Round, next_Round
 end
 
 def FillGame(aTeamA_Lname,aTeamA_Sname,aTeamA_seed,aTeamB_Lname,aTeamB_Sname,aTeamB_seed,aRegion)
@@ -366,11 +367,11 @@ end
 def gen_bracket(round1, round2, round3, round4, round5, round6)
 	# This function generates the bracket.
 	
-	round2 = AdvanceRound(round1,round2)
-	round3 = AdvanceRound(round2,round3)
-	round4 = AdvanceRound(round3,round4)
-	round5 = AdvanceRound(round4,round5)
-	round6 = AdvanceRound(round5,round6)
+	round1, round2 = AdvanceRound(round1,round2)
+	round2, round3 = AdvanceRound(round2,round3)
+	round3, round4 = AdvanceRound(round3,round4)
+	round4, round5 = AdvanceRound(round4,round5)
+	round5, round6 = AdvanceRound(round5,round6)
 
 	# Fill Champion
 	if( round6[0].get_Winner != nil)
@@ -379,11 +380,12 @@ def gen_bracket(round1, round2, round3, round4, round5, round6)
 	    champ, loser, bRet = DrawWinner(round6[0].get_teamA, round6[0].get_teamB)
 	    if( bRet == 0 )
 	      champ, loser = DrawWinnerAlternate(round6[0].get_teamA, round6[0].get_teamB)
-     	      puts "Champ DrawWinnerAlternate Called"
+     	      #puts "Champ DrawWinnerAlternate Called"
 	    end
+	    round6[0].set_Winner(champ)
 	end
-	
-	print("Champ = #{champ.get_short_name}\n")
+
+	#print("Champ = #{champ.get_short_name}\n")
 	isValid = 1
 		
 	return round1, round2, round3, round4, round5, round6, champ, isValid
