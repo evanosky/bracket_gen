@@ -291,8 +291,11 @@ def setup_bracket(dataSeed, round1)
     round5 = Array.new(2)  { Game.new } # 2  Games,  4 teams
     round6 = Array.new(1)  { Game.new } # 1  Game ,  2 teams
 
+    bdataSeedValid = true
+
     if( dataSeed  == nil)
-       return round1, round2, round3, round4, round5, round6
+      bdataSeedValid = false 
+      #return round1, round2, round3, round4, round5, round6
     end
     
   # Round 1 Teams
@@ -301,7 +304,7 @@ def setup_bracket(dataSeed, round1)
   # Round 1 Winners, Round 2 Teams
     n = 1
     for m in 0..(32 - 1)
-      if( dataSeed[n][m].length != 0)
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round1[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
@@ -309,7 +312,8 @@ def setup_bracket(dataSeed, round1)
   # Round 2 Winners, Round 3 Teams (Sweet 16)
     n = 2
     for m in 0..(16 - 1)
-      if( dataSeed[n][m].length != 0)
+      round2[m]  = FillGame('','',-1,'','',-1,'')
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round2[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
@@ -317,7 +321,8 @@ def setup_bracket(dataSeed, round1)
     # Round 3 Winners, Round 4 Teams (Elite 8)
     n = 3
     for m in 0..(8 - 1)
-      if( dataSeed[n][m].length != 0)
+      round3[m]  = FillGame('','',-1,'','',-1,'')
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round3[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
@@ -325,26 +330,31 @@ def setup_bracket(dataSeed, round1)
     # Round 4 Winners, Round 5 Teams (Final 4)
     n = 4
     for m in 0..(4 - 1)
-      if( dataSeed[n][m].length != 0)
+      round4[m]  = FillGame('','',-1,'','',-1,'')
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round4[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
     
+    round5[0]  = FillGame('','',-1,'','',-1,'')
+    round5[1]  = FillGame('','',-1,'','',-1,'')
+    round6[0]  = FillGame('','',-1,'','',-1,'')
+
     # Round 5 Winners, Round 6 Teams (Final 2)
     n = 5
     m = 0
-    if( dataSeed[n][m].length != 0)
+    if( bdataSeedValid && dataSeed[n][m].length != 0)
       round5[0].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
     end
 
     m = 2
-    if( dataSeed[n][m].length != 0)
+    if( bdataSeedValid && dataSeed[n][m].length != 0)
       round5[1].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
     end
     
     # Round 6 Winner (Champ)
     m = 1
-    if( dataSeed[n][m].length != 0)
+    if( bdataSeedValid && dataSeed[n][m].length != 0)
       round6[0].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
     end
 	 

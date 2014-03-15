@@ -1,5 +1,5 @@
 require "bracket_generator"
-#require "bracket_scorer"
+require "bracket_scorer"
 
 class BracketsController < ApplicationController
 
@@ -25,17 +25,20 @@ class BracketsController < ApplicationController
     end
     
     round1, round2, round3, round4, round5, round6 = setup_bracket(dataSeed, get_2013_Round1) 
+    puts round2[0].get_teamA.get_short_name
+    puts round2[0].get_teamB.get_short_name
 
+    
     if (bAutoFill)
       round1, round2, round3, round4, round5, round6, @champ, @isValid = gen_bracket(round1, round2, round3, round4, round5, round6)
+      puts "Bracket Score"
+      puts score_2013bracket(round1, round2, round3, round4, round5, round6)
     else
-      @champ = nil
+      @champ = Team.new('','',-1,'')
       @isValid = false
     end
     
-    #bracket_score = score_bracket(round1, round2, round3, round4, round5, round6)
-    puts "Bracket Score"
-    #puts bracket_score
+
 
     @rounds = Array.new
     @rounds[0] = round1
