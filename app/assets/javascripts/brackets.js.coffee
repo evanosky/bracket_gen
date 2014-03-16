@@ -79,19 +79,24 @@ Application.fillForward = (start_at, final_round) ->
     else
       round = 12 - round_index
 
-    if (bToRight)
-      next_round_column = round_column.prev()
+    
+    if (round_index == 6) & ((row == 27) || (row == 35))
+      bChampionship = true
+      next_round_column = round_column
     else
-      next_round_column = round_column.next()
+      bChampionship = false
+      if (bToRight)
+        next_round_column = round_column.prev()
+      else
+        next_round_column = round_column.next()
 
     offset = 1*Math.pow(2, round-1)
 
-    bChampionship = false
     if (round_index == 5)
         next_round_row = 2 + 27
     else if (round_index == 7)
         next_round_row = 2 + 35
-    else if (round_index == 6) & ((row == 27) || (row == 35))
+    else if bChampionship
         next_round_row = 2 + 32
     else
       if (bTopTeam)
@@ -128,11 +133,14 @@ Application.drop = (ev) ->
   ev.preventDefault();
   data = ev.dataTransfer.getData("Text")
 
+  el = $(ev.target).parent()
+  row = el.prevAll().size() - 2
+
   parents = Application.GetParents(ev.target)
-  parent_options = parents.teams
+  new_list = parents.teams
   parent_round = parents.round
 
-  old_list = parent_options
+  old_list = new_list
   old_round = parent_round
   
   while (old_round != 1)
@@ -152,7 +160,10 @@ Application.drop = (ev) ->
   if (found_at == -1)
     alert("NOT FOUND")
   else
-    Application.fillForward(new_list[found_at], parent_round)
+    if (parent_round == 5) && (row == 32) #championship
+      Application.fillForward(new_list[found_at], 6)
+    else
+      Application.fillForward(new_list[found_at], parent_round)
 
 
 

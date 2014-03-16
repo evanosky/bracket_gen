@@ -8,7 +8,9 @@ $pxPadding: 3px;
 
 $pxRowHeaderHeight: 20px;
 $uiHeaderRows: 2;
+
 $pxRowHeight: 10px;
+$uiRows: 64;
 
 $pxArrowSize: 18px;
 
@@ -111,6 +113,22 @@ div#BracketGen
 			height: $pxImageSize;
 			left: $pxRoundWidth * $uiRounds /2 - $pxImageSize / 2;
 			top: $pxRowHeaderHeight * $uiHeaderRows;
+		}
+
+		div#Overlay_Score {
+			$pxScoreSize: 125px;
+
+			position: absolute;
+			text-align: center;
+			width: $pxScoreSize;
+			left: $pxRoundWidth * $uiRounds /2 - $pxScoreSize / 2;
+			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 12 * 5;
+
+			font-size: .8em;
+
+        span.value {
+			    font-weight: bolder;
+			  }
 		}
 
 	}
@@ -278,5 +296,9 @@ div#BracketGen
 a.ContextIcon {
 	text-decoration: none;	
 
+}
+
+#auto_fill_form {
+	display:none;
 }
 
