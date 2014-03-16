@@ -28,11 +28,10 @@ class BracketsController < ApplicationController
     puts round2[0].get_teamA.get_short_name
     puts round2[0].get_teamB.get_short_name
 
-    
     if (bAutoFill)
       round1, round2, round3, round4, round5, round6, @champ, @isValid = gen_bracket(round1, round2, round3, round4, round5, round6)
-      puts "Bracket Score"
-      puts score_2013bracket(round1, round2, round3, round4, round5, round6)
+      @score = score_2013bracket(round1, round2, round3, round4, round5, round6)
+      puts "Bracket Score: #{@score}"
     else
       @champ = Team.new('','',-1,'')
       @isValid = false

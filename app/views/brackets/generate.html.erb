@@ -11,7 +11,7 @@
 		<div id="Overlay_Midwest" class="ConfLabel">Midwest</div>
 		<div id="Overlay_Score" class="Score">
 			<span class="label">Score: </span>
-			<span class="value">900</span>
+			<span class="value"><%= @score.nil? ? "n/a" : @score.to_s %></span>
 		</div>
 	</div>
 
@@ -31,7 +31,7 @@
 			:uiRowsToDo => uiRows/2-1,
 			:bDraggable => true, #uiRoundIndex == 0,
 			:bDroppable => uiRoundIndex != 0,
-			:bUseName => uiRoundIndex == 0,
+			:bUseName => true, #uiRoundIndex == 0,
 			:bFillAll => !@bBlank} %>
 
 	<% end %>
@@ -49,7 +49,7 @@
 			:uiRowsToDo => uiRows/2-1,
 			:bDraggable => true, #uiRoundIndex == 0,
 			:bDroppable => uiRoundIndex != 0,
-			:bUseName => uiRoundIndex == 0,
+			:bUseName => true, #uiRoundIndex == 0,
 			:bFillAll => !@bBlank} %>
 
 	<% end %>
@@ -61,21 +61,5 @@
 	<textarea cols="100" rows="15" id="data_seed" name="data_seed" style="float: left"><%= @seed %></textarea>
 	<input type="checkbox" id="auto_fill" name="auto_fill" value="true" checked="false">Auto Fill?</input>
 </form>
-<div style="float: right" >
-	<a href="#" class="ContextIcon" onclick="Application.UndoAutoFillClick(event);">
-		<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
-		<div style="clear: both; font-size: .8em; font-weight: bold;">
-			Undo AutoComplete
-		</div>
-	</a>
-</div>
-<div style="float: right" >
-	<a href="#" class="ContextIcon" onclick="Application.RetryAutoFillClick(event);">
-		<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
-		<div style="clear: both; font-size: .8em; font-weight: bold;">
-			Retry AutoComplete
-		</div>
-	</a>
-</div>
 
 
