@@ -202,28 +202,24 @@ def AdvanceRound(aThisRound, aNextRound)
 	next_Round = aNextRound
 	
 	for game_num in 0..(aThisRound.length/2 - 1)
-	  if( aThisRound[game_num*2].get_Winner != nil) # Check if winner has already been picked
+	  if( aThisRound[game_num*2].get_Winner != nil && (aThisRound[game_num*2].get_Winner.get_short_name == aThisRound[game_num*2].get_teamA.get_short_name || aThisRound[game_num*2].get_Winner.get_short_name == aThisRound[game_num*2].get_teamB.get_short_name) ) # Check if winner has already been picked
 	    next_Round[game_num].set_teamA(aThisRound[game_num*2].get_Winner)
 	  else
 	    winner, loser, bRet = DrawWinner(aThisRound[game_num*2].get_teamA, aThisRound[game_num*2].get_teamB)
 	    if( bRet == 0 )
 	      winner, loser = DrawWinnerAlternate(aThisRound[game_num*2].get_teamA, aThisRound[game_num*2].get_teamB)
-	      #puts "DrawWinnerAlternate Called"
 	    end
-	    #print("Game #{game_num*2}, winner = #{winner.get_short_name}, loser = #{loser.get_short_name}\n");
 	    this_Round[game_num*2].set_Winner(winner)
 	    next_Round[game_num].set_teamA(winner)	    
 	  end
 	  
-	  if( aThisRound[game_num*2+1].get_Winner != nil) # Check if winner has already been picked
+	  if( aThisRound[game_num*2+1].get_Winner != nil && (aThisRound[game_num*2+1].get_Winner.get_short_name == aThisRound[game_num*2+1].get_teamA.get_short_name || aThisRound[game_num*2+1].get_Winner.get_short_name == aThisRound[game_num*2+1].get_teamB.get_short_name) ) # Check if winner has already been picked
 	    next_Round[game_num].set_teamB(aThisRound[game_num*2+1].get_Winner)
 	  else
 	    winner, loser, bRet = DrawWinner(aThisRound[game_num*2+1].get_teamA, aThisRound[game_num*2+1].get_teamB)
 	    if( bRet == 0 )
 	      winner, loser = DrawWinnerAlternate(aThisRound[game_num*2+1].get_teamA, aThisRound[game_num*2+1].get_teamB)
-     	      #puts "DrawWinnerAlternate Called"
 	    end
-	    #print("Game #{game_num*2+1}, winner = #{winner.get_short_name}, loser = #{loser.get_short_name}\n");
 	    this_Round[game_num*2+1].set_Winner(winner)
 	    next_Round[game_num].set_teamB(winner)
 	  end
@@ -237,7 +233,6 @@ def FillGame(aTeamA_Lname,aTeamA_Sname,aTeamA_seed,aTeamB_Lname,aTeamB_Sname,aTe
 	myGame = Game.new
 	myGame.set_teamA(Team.new(aTeamA_Lname,aTeamA_Sname,aTeamA_seed,aRegion))
 	myGame.set_teamB(Team.new(aTeamB_Lname,aTeamB_Sname,aTeamB_seed,aRegion))
-	#print("#{myGame.get_teamA.get_region} Region: ##{myGame.get_teamA.get_seed} #{myGame.get_teamA.get_long_name} vs. ##{myGame.get_teamB.get_seed} #{myGame.get_teamB.get_long_name}\n")
 	return myGame
 end
 
@@ -291,8 +286,11 @@ def setup_bracket(dataSeed, round1)
     round5 = Array.new(2)  { Game.new } # 2  Games,  4 teams
     round6 = Array.new(1)  { Game.new } # 1  Game ,  2 teams
 
+    bdataSeedValid = true
+
     if( dataSeed  == nil)
-       return round1, round2, round3, round4, round5, round6
+      bdataSeedValid = false 
+      #return round1, round2, round3, round4, round5, round6
     end
     
   # Round 1 Teams
@@ -301,7 +299,7 @@ def setup_bracket(dataSeed, round1)
   # Round 1 Winners, Round 2 Teams
     n = 1
     for m in 0..(32 - 1)
-      if( dataSeed[n][m].length != 0)
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round1[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
@@ -309,7 +307,8 @@ def setup_bracket(dataSeed, round1)
   # Round 2 Winners, Round 3 Teams (Sweet 16)
     n = 2
     for m in 0..(16 - 1)
-      if( dataSeed[n][m].length != 0)
+      round2[m]  = FillGame('','',-1,'','',-1,'')
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round2[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
@@ -317,7 +316,8 @@ def setup_bracket(dataSeed, round1)
     # Round 3 Winners, Round 4 Teams (Elite 8)
     n = 3
     for m in 0..(8 - 1)
-      if( dataSeed[n][m].length != 0)
+      round3[m]  = FillGame('','',-1,'','',-1,'')
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round3[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
@@ -325,26 +325,31 @@ def setup_bracket(dataSeed, round1)
     # Round 4 Winners, Round 5 Teams (Final 4)
     n = 4
     for m in 0..(4 - 1)
-      if( dataSeed[n][m].length != 0)
+      round4[m]  = FillGame('','',-1,'','',-1,'')
+      if( bdataSeedValid && dataSeed[n][m].length != 0)
 	  round4[m].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
       end
     end
     
+    round5[0]  = FillGame('','',-1,'','',-1,'')
+    round5[1]  = FillGame('','',-1,'','',-1,'')
+    round6[0]  = FillGame('','',-1,'','',-1,'')
+
     # Round 5 Winners, Round 6 Teams (Final 2)
     n = 5
     m = 0
-    if( dataSeed[n][m].length != 0)
+    if( bdataSeedValid && dataSeed[n][m].length != 0)
       round5[0].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
     end
 
     m = 2
-    if( dataSeed[n][m].length != 0)
+    if( bdataSeedValid && dataSeed[n][m].length != 0)
       round5[1].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
     end
     
     # Round 6 Winner (Champ)
     m = 1
-    if( dataSeed[n][m].length != 0)
+    if( bdataSeedValid && dataSeed[n][m].length != 0)
       round6[0].set_Winner(get_Team_by_short_name(dataSeed[n][m],round1))
     end
 	 
