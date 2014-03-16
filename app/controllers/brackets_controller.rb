@@ -26,13 +26,13 @@ class BracketsController < ApplicationController
     
     round1, round2, round3, round4, round5, round6 = setup_bracket(dataSeed, get_2013_Round1) 
 
-    if (bAutoFill)
+    #if (bAutoFill)
       round1, round2, round3, round4, round5, round6, @champ, @isValid = gen_bracket(round1, round2, round3, round4, round5, round6)
-    else
-      @champ = nil
-      @isValid = false
-    end
-    
+    #else
+    #  @champ = nil
+    #  @isValid = false
+    #end
+
     #bracket_score = score_bracket(round1, round2, round3, round4, round5, round6)
     puts "Bracket Score"
     #puts bracket_score
