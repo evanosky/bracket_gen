@@ -24,16 +24,13 @@ class BracketsController < ApplicationController
       Rails.logger.warn "*****#{dataSeed}, auto_fill: #{bAutoFill}"
     end
     
-    round1, round2, round3, round4, round5, round6 = setup_bracket(dataSeed, get_2013_Round1) 
-    puts round2[0].get_teamA.get_short_name
-    puts round2[0].get_teamB.get_short_name
+    #round1, round2, round3, round4, round5, round6, @champ = setup_bracket(dataSeed, get_2013_Round1) 
+    round1, round2, round3, round4, round5, round6, @champ = setup_bracket(dataSeed, get_2014_Round1) 
 
     if (bAutoFill)
       round1, round2, round3, round4, round5, round6, @champ, @isValid = gen_bracket(round1, round2, round3, round4, round5, round6)
-      @score = score_2013bracket(round1, round2, round3, round4, round5, round6)
-      puts "Bracket Score: #{@score}"
+      #@score = score_2013bracket(round1, round2, round3, round4, round5, round6)
     else
-      @champ = Team.new('','',-1,'')
       @isValid = false
     end
     
