@@ -38,6 +38,8 @@ div#main_middle:before {
 	-webkit-transform: rotate(360deg);
 }
 
+
+
 div#main_middle.no_before:before {
 	border-style: none;
 }
@@ -83,23 +85,23 @@ div#BracketGen
 			width: $pxRoundWidth;
 		}
 
-		div#Overlay_South {
+		div#Overlay_UpperLeft {
 			left: $pxRoundWidth * 3;
 			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 4 * 4;
 		}
 
-		div#Overlay_West {
+		div#Overlay_LowerLeft {
 			left: $pxRoundWidth * 3;
 			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 12 * 4;
 		}
 
-		div#Overlay_East {
+		div#Overlay_UpperRight {
 			left: $pxRoundWidth * 7;
 			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 4 * 4;
 			text-align: right;
 		}
 
-		div#Overlay_Midwest {
+		div#Overlay_LowerRight {
 			left: $pxRoundWidth * 7;
 			top: $pxRowHeaderHeight * $uiHeaderRows + $pxRowHeight * 12 * 4;
 			text-align: right;

@@ -158,16 +158,12 @@ Application.drop = (ev) ->
       break
 
   if (found_at == -1)
-    alert("NOT FOUND")
+    alert("Not Possible to Drop a Team Here")
   else
     if (parent_round == 5) && (row == 32) #championship
       Application.fillForward(new_list[found_at], 6)
     else
       Application.fillForward(new_list[found_at], parent_round)
-
-
-
-
 
 
 Application.getTeamsByRound = ->
@@ -194,15 +190,15 @@ Application.getTeamsByRound = ->
 Application.onAutoFillClick = (ev) ->
   data = Application.getTeamsByRound()
   $("#data_seed").text(data)
-  $("#auto_fill").attr("checked", true)
+  $("#auto_fill").val("true")
   $("#auto_fill_form").submit()
 
 Application.UndoAutoFillClick = (ev) ->
-  $("#auto_fill").attr("checked", false)
+  $("#auto_fill").val("false")
   $("#auto_fill_form").submit()
 
 Application.RetryAutoFillClick = (ev) ->
-  $("#auto_fill").attr("checked", true)
+  $("#auto_fill").val("true")
   $("#auto_fill_form").submit()
 
 $(document).ready ->

@@ -1,14 +1,24 @@
 <% content_for :head do %>
-	<div class="TopHeader">2013 NCAA Bracket</div>
+  <div style="position: relative; width: 100px; top: 60px;">
+		<a href="<%= url_for(:controller=>"brackets", :action => "generate", :blank=> true, :year=> 2014) %>" class="ContextIcon">
+			<div class="TopHeader">2014 NCAA Bracket</div>
+		</a>
+	</div>
+
+	<div style="position: relative; width: 100px; top: 200px;">
+		<a href="<%= url_for(:controller=>"brackets", :action => "generate", :blank=> true, :year=> 2013) %>" class="ContextIcon">
+			<div class="TopHeader">2013 NCAA Bracket</div>
+		</a>
+	</div>
 <% end %>
 
 <div id="BracketGen">
 	<div class="Overlays">
-		<%= image_tag "2013-final-four-logo.jpg", :class => "BracketLogo" %>
-		<div id="Overlay_South" class="ConfLabel">South</div>
-		<div id="Overlay_West" class="ConfLabel">West</div>
-		<div id="Overlay_East" class="ConfLabel">East</div>
-		<div id="Overlay_Midwest" class="ConfLabel">Midwest</div>
+		<%= image_tag @uiYear.to_s + "-final-four-logo.jpg", :class => "BracketLogo" %>
+		<div id="Overlay_UpperLeft" class="ConfLabel"><%= @ConfLabel["UpperLeft"] %></div>
+		<div id="Overlay_LowerLeft" class="ConfLabel"><%= @ConfLabel["LowerLeft"] %></div>
+		<div id="Overlay_UpperRight" class="ConfLabel"><%= @ConfLabel["UpperRight"] %></div>
+		<div id="Overlay_LowerRight" class="ConfLabel"><%= @ConfLabel["LowerRight"] %></div>
 		<div id="Overlay_Score" class="Score">
 			<span class="label">Score: </span>
 			<span class="value"><%= @score.nil? ? "n/a" : @score.to_s %></span>
@@ -32,7 +42,8 @@
 			:bDraggable => true, #uiRoundIndex == 0,
 			:bDroppable => uiRoundIndex != 0,
 			:bUseName => true, #uiRoundIndex == 0,
-			:bFillAll => !@bBlank} %>
+			:bFillAll => !@bBlank,
+		  :columnDesc => @ColumnDesc} %>
 
 	<% end %>
 
@@ -50,16 +61,60 @@
 			:bDraggable => true, #uiRoundIndex == 0,
 			:bDroppable => uiRoundIndex != 0,
 			:bUseName => true, #uiRoundIndex == 0,
-			:bFillAll => !@bBlank} %>
+			:bFillAll => !@bBlank,
+		  :columnDesc => @ColumnDesc} %>
 
 	<% end %>
 
 	</div>
 </div>
 
-<form id="auto_fill_form" action="/brackets/generate" method="post">
+<form id="auto_fill_form" action="/brackets/generate?year=<%=@uiYear%>" method="post">
 	<textarea cols="100" rows="15" id="data_seed" name="data_seed" style="float: left"><%= @seed %></textarea>
-	<input type="checkbox" id="auto_fill" name="auto_fill" value="true" checked="false">Auto Fill?</input>
+	<input type="text" id="auto_fill" name="auto_fill" value="true"/>
 </form>
+
+<% content_for :menu do %>
+	<div>
+		<a href="#" onclick="Application.printme();" class="ContextIcon">
+			<%= image_tag "printer.png", :width => "50px", :style => "margin-top: 50px;"%>
+			<div style="clear: both; font-size: .8em; font-weight: bold;">
+				Print
+			</div>
+		</a>
+	</div>
+	<div>
+		<a href="<%= url_for(:controller=>"brackets", :action => "generate", :blank=> true, :year=> @uiYear) %>" class="ContextIcon">
+			<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
+			<div style="clear: both; font-size: .8em; font-weight: bold;">
+				Blank Bracket
+			</div>
+		</a>
+	</div>
+	<div>
+		<a href="#" class="ContextIcon" onclick="Application.onAutoFillClick(event);">
+			<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
+			<div style="clear: both; font-size: .8em; font-weight: bold;">
+				Fill In Bracket
+			</div>
+		</a>
+	</div>
+	<div>
+		<a href="#" class="ContextIcon" onclick="Application.UndoAutoFillClick(event);">
+			<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
+			<div style="clear: both; font-size: .8em; font-weight: bold;">
+				Undo
+			</div>
+		</a>
+	</div>
+	<div>
+		<a href="<%=url_for(:controller=>"brackets", :action => "info") %>" class="ContextIcon">
+			<%= image_tag "info.png", :width => "50px", :style => "margin-top: 50px; " %>
+			<div style="clear: both; font-size: .8em; font-weight: bold;">
+				Info
+			</div>
+		</a>
+	</div>
+<% end %>
 
 

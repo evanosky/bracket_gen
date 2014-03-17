@@ -13,54 +13,13 @@
 		</div>
 		<div id="main" style="clear: both" >
 			<div id="main_left" style="float: left; width: 100px; color: black;">
-				<div style="position: relative; width: 100px; top: 60px;">
-						<%= yield :head %>
-				</div>
+					<%= yield :head %>
 			</div>
 			<div id="main_middle">
 				<%= yield %>
 			</div>
 			<div id="main_right" style="float: left; width: 50px; margin-left: 10px;">
-				<div>
-					<a href="#" onclick="Application.printme();" class="ContextIcon">
-						<%= image_tag "printer.png", :width => "50px", :style => "margin-top: 50px;"%>
-						<div style="clear: both; font-size: .8em; font-weight: bold;">
-							Print
-						</div>
-					</a>
-				</div>
-				<div>
-					<a href="<%= url_for(:controller=>"brackets", :action => "generate", :blank=> true) %>" class="ContextIcon">
-						<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
-						<div style="clear: both; font-size: .8em; font-weight: bold;">
-							Blank Bracket
-						</div>
-					</a>
-				</div>
-				<div>
-					<a href="#" class="ContextIcon" onclick="Application.onAutoFillClick(event);">
-						<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
-						<div style="clear: both; font-size: .8em; font-weight: bold;">
-							Fill In Bracket
-						</div>
-					</a>
-				</div>
-				<div>
-					<a href="#" class="ContextIcon" onclick="Application.UndoAutoFillClick(event);">
-						<%= image_tag "refresh.png", :width => "50px", :style => "margin-top: 50px; " %>
-						<div style="clear: both; font-size: .8em; font-weight: bold;">
-							Undo
-						</div>
-					</a>
-				</div>
-				<div>
-					<a href="<%=url_for(:controller=>"brackets", :action => "info") %>" class="ContextIcon">
-						<%= image_tag "info.png", :width => "50px", :style => "margin-top: 50px; " %>
-						<div style="clear: both; font-size: .8em; font-weight: bold;">
-							Info
-						</div>
-					</a>
-				</div>
+				<%= yield :menu %>
 			</div>
 		</div>
 	</div>
